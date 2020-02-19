@@ -66,7 +66,14 @@ uint32_t volatile iwdgDuration = 0;
 extern uint32_t MesETCntr;
 static uint32_t MesETCntrOld=0;
 
-
+/* Прапор запису на флеш налаштувань виробника
+ * піднімається в wk_distance_MBslave.c/h
+ * командою дистанційного управління через МОДБАС*/
+volatile FunctionalState UserSetWriteFlag = 0;
+/* Прапор запису на флеш налаштувань користувача
+ * піднімається в wk_distance_MBslave.c/h
+ * командою дистанційного управління через МОДБАС*/
+volatile FunctionalState FactorySetWriteFlag = 0;
 /****************************************************************/
 tkMAIN_status_t tkInit(void){
 /****************************************************************/
@@ -97,24 +104,28 @@ tkMAIN_status_t tkInit(void){
 			/* Iніціювати дату і час датою і часом компіляції */
 			HALRTC_ZeroInit();
 			/* Ініціювати налаштування виробника і користувача за замовчуванням */
-//			f_FSsetInit();
-//			f_UsetInit();
-			/* Записати на флеш
-			 *  налаштування виробника і користувача за замовчуванням */
+			flash_status_t fs = FLASH_UNKNOWN_Err;
 			fs=f_VV300_FactorySets_Write();
 			if (fs != FLASH_OK){
 				f_PutErrRecord(ERR fs);
-				tkI=tkMAIN_FLASHErr;break;
+		//		tkI=tkMAIN_FLASHErr;break;
 			}
+
+			/* Якщо отримали команду записати налаштування користувача на флеш - записати */
 			fs=f_VV300_UserSets_Write();
 			if (f_VV300_UserSets_Write() != FLASH_OK){
 				f_PutErrRecord(ERR fs);
-				tkI=tkMAIN_FLASHErr;
-				break;
+		//			tkI=tkMAIN_FLASHErr;
+		//			break;
 			}
+			/* Записали на флеш
+			 *  налаштування виробника і користувача за замовчуванням */
+
+		}
+
 			/* Записати у регіст мітку про завершену первинну ініціалізацію контролера */
 			f_ZeroLabelWrite(ZERO_INIT_Cplt);
-		}
+
 		/* дата та час у форматі 64 */
 	    f_wk64_time_Init();
 	    /* Дисплей */
@@ -199,6 +210,7 @@ tkMAIN_status_t tkInit(void){
 volatile uint32_t loop_duration1 =0;
 volatile uint32_t loop_durationMax=0;
 tkMAIN_status_t tkLoop(void){
+	volatile tkMAIN_status_t tkL=tkMAIN_UNKNOWN_Err;
 
 //	HAL_IWDG_Refresh(&hiwdg); /* 6550 ms Реально - 3200 */
 	loop_counter++;
@@ -246,7 +258,33 @@ tkMAIN_status_t tkLoop(void){
 		tkDisplay_PutLowStr(st);
 	}
 #endif
-//	keyboard = buttons_pool ();                                           /* опитування клавіш */
+	/* Якщо отримали команду записати налаштування виробника на флеш - записати */
+	if(FactorySetWriteFlag==ENABLE){
+		flash_status_t fs = FLASH_UNKNOWN_Err;
+		fs=f_VV300_FactorySets_Write();
+		if (fs != FLASH_OK){
+			f_PutErrRecord(ERR fs);
+//			tkI=tkMAIN_FLASHErr;break;
+		}
+		FactorySetWriteFlag=DISABLE;
+	}
+	/* Якщо отримали команду записати налаштування користувача на флеш - записати */
+	if(UserSetWriteFlag==ENABLE){
+		flash_status_t fs = FLASH_UNKNOWN_Err;
+		fs=f_VV300_UserSets_Write();
+		if (f_VV300_UserSets_Write() != FLASH_OK){
+			f_PutErrRecord(ERR fs);
+//			tkI=tkMAIN_FLASHErr;
+//			break;
+		}
+		UserSetWriteFlag=DISABLE;
+	}
+
+
+
+
+
+	//	keyboard = buttons_pool ();                                           /* опитування клавіш */
 //	if (keyboard 	!= none){							  /* якщо виявлено натиснуту кнопку контролера - обробка меню */
 //		WOmenuDoing (keyboard);
 //	}

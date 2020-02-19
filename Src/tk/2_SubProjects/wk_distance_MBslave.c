@@ -85,10 +85,22 @@ extern on_off_t AutoCtrl;
  static uint8_t ExFlag=0;
 
  static uint8_t f_0x0080_20m(uint16_t *res);
+ static int8_t f_03_float_to_Tx(
+ 		float af,
+ 		modbus_slave_tx_msg_t *tx,
+ 		uint16_t i);
  static int8_t  f_float_to_2x16(float af, uint16_t *ptwo);
  //static float   f_cst(uint16_t xxxx);
  static uint8_t f_0x0090_20m(uint16_t *res);
 
+ /* Прапор запису на флеш налаштувань виробника
+  * піднімається в wk_distance_MBslave.c/h
+  * командою дистанційного управління через МОДБАС*/
+ extern volatile FunctionalState UserSetWriteFlag;
+ /* Прапор запису на флеш налаштувань користувача
+  * піднімається в wk_distance_MBslave.c/h
+  * командою дистанційного управління через МОДБАС*/
+ extern volatile FunctionalState FactorySetWriteFlag;
 
  /* Вхід симуляції від Модбас */
  extern uint16_t AmplMode; /* 0- синусоїдальна
@@ -125,7 +137,7 @@ void fTK5_Slave1(
 //             /* ЧИТАЄМО ОСНОВНІ ПАРАМЕТРИ                 */
             	if ((rAddress>=0x0080)&&(rAddress<0x0090)){
             		uint16_t x10Regs[0x10]={0};
-            		ExFlag =  f_0x0080_20m(&x10Regs);
+            		ExFlag =  f_0x0080_20m(x10Regs);
                 	int32_t shift = rAddress-0x0080;
                     if((shift+NumberOfRegs)>0x10){ExFlag=0x02;}
                     else{
@@ -139,7 +151,7 @@ void fTK5_Slave1(
             	}
             	else if ((rAddress>=0x0090)&&(rAddress<0x00A0)){
             		uint16_t x10Regs[0x10]={0};
-            		ExFlag =  f_0x0090_20m(&x10Regs);
+            		ExFlag =  f_0x0090_20m(x10Regs);
                 	int32_t shift = rAddress-0x0090;
                     if((shift+NumberOfRegs)>0x10){ExFlag=0x02;}
                     else{
@@ -159,9 +171,46 @@ void fTK5_Slave1(
             				 tx->msg[3+2*i]=GRIDRegsBlock[i+shift]   / 0x100;
             				 tx->msg[3+2*i+1]=GRIDRegsBlock[i+shift] % 0x100;
             			 }
-            			 tx->msg[2]=2*NumberOfRegs;
-            			 tx->length=3+2*NumberOfRegs;
+
             		 }
+            	}
+            	/* Читаємо за один раз всі налаштування користувача */
+        		else if((rAddress==0x2000)&&(NumberOfRegs==0x20)){
+        			uint16_t value_i=0;
+        			/* 0х2000..0x2001*/
+        			value_i=(uint16_t)user_settings.oper_mode;
+        			tx->msg[3+0x00]=value_i / 0x100;
+        			tx->msg[3+0x01]=value_i % 0x100;
+
+        		}
+            	/* Читаємо за один раз всі налаштувння виробника    */
+        		else if((rAddress==0x2020)&&(NumberOfRegs==0x20)){
+        		    uint16_t val=0;
+            	///float amperageAclbr; 	// 0х2020
+            	    f_03_float_to_Tx(fSet.amperageAclbr, tx, 0x00);
+            	// float clbr_iA;			// 0х2022
+            	    f_03_float_to_Tx(fSet.clbr_iA,       tx, 0x04);
+            	//float amperageBclbr; 		// 0х2024
+            	    f_03_float_to_Tx(fSet.amperageBclbr, tx, 0x08);
+            	//float clbr_iB;			// 0х2026
+            	    f_03_float_to_Tx(fSet.clbr_iB,       tx, 0x0C);
+            	//float amperageCclbr; 		// 0х2028
+            	    f_03_float_to_Tx(fSet.amperageCclbr, tx, 0x10);
+            	//float clbr_iC;			// 0х202A
+            	    f_03_float_to_Tx(fSet.clbr_iC,       tx, 0x14);
+            	//fSet.voltageCclbr			// 0x202C
+            	    f_03_float_to_Tx(fSet.voltageCclbr,  tx, 0x18);
+            	//float clbr_uC;			// 0х202E
+            	    f_03_float_to_Tx(fSet.clbr_uC,       tx, 0x1C);
+            	//uint16_t DeviceMode;     //0x1030 Типорозмір контролера 1...5
+            	    val=  fSet.DeviceMode;
+            	    tx->msg[3+0x20] = val / 0x100;
+            	    tx->msg[3+0x21] = val % 0x100;
+            	//uint16_t Faznost;		 //0x1031
+            	    val=  fSet.Faznost;
+            	    tx->msg[3+0x22] = val / 0x100;
+            	    tx->msg[3+0x23] = val % 0x100;
+
             	}
 #ifdef DEBUGGING_ONLY
             	else if((rAddress==0xE000)&&(NumberOfRegs==0x0005)){
@@ -176,11 +225,11 @@ void fTK5_Slave1(
             		tx->msg[11]=CosinusPhi/0x100;
             		tx->msg[12]=CosinusPhi%0x100;
 
-            		tx->msg[2]=10;
-            		tx->length=3+2*NumberOfRegs;
             	}
 #endif    //DEBUGGING_ONLY
             	else{}
+            	tx->msg[2]=2*NumberOfRegs;
+            	tx->length=3+2*NumberOfRegs;
             	ExFlag=0x00;
             }/* Якщо не помилка кількості запитаних регістрів*/
             if(!ExFlag){
@@ -194,13 +243,11 @@ void fTK5_Slave1(
        else if (Funk_Mod==0x06){
         	volatile uint16_t RegAddress=(rx->msg[2]<<8)+rx->msg[3];
         	volatile uint16_t RegValue=(rx->msg[4]<<8)+rx->msg[5];
-        	volatile static float aFloat_buff=0;
-        	volatile static float bFloat_buff=0;
+//        	volatile static float aFloat_buff=0;
+//        	volatile static float bFloat_buff=0;
         	switch(RegAddress){
-
-
         	case 0x0000:
-        	//Аварійна дистанційна зупинка ЕД(в будь-якому з дист. режимів роботи)
+        	// Команда ПУСК/СТОП електродвигуна чи включення пускача )
         		if(AmplMode==0){
         			if     (RegValue==0x00){CmndForMotor=DISABLE;}
         			else if(RegValue==0xFF){CmndForMotor=ENABLE;}
@@ -213,11 +260,19 @@ void fTK5_Slave1(
         		}
         		else{}
         	break;
-        	case 0x1000:
-        		if (RegValue<2){
-        			user_settings.oper_mode=(oper_mode_t)RegValue;
-        		}
+        	case 0x0010:
+        		/* Команда запису на флеш налаштувань користувача    */
+        		UserSetWriteFlag=(FunctionalState)RegValue;
         	break;
+        	case 0x0011:
+        		/* Команда запису на флеш налаштувань   виробника */
+        		FactorySetWriteFlag=(FunctionalState)RegValue;
+        	break;
+//        	case 0x1000:
+//        		if (RegValue<2){
+//        			user_settings.oper_mode=(oper_mode_t)RegValue;
+//        		}
+//        	break;
 #ifdef DEBUGGING_ONLY
 	        case 0xE000:
 	        	/* Экран Тк4:*/
@@ -248,43 +303,85 @@ void fTK5_Slave1(
         	}
         	}//switch(RegAddress){
         	/* Responce message 0x06*/
-        	 /* Register Number */
-        	 tx->msg[2]=rx->msg[2];
-        	 tx->msg[3]=rx->msg[3];
-        	 /* Register Value */
-        	 tx->msg[4]=rx->msg[4];
-        	 tx->msg[5]=rx->msg[5];
-        	 tx->length=6;
+        	if (ExFlag == 0){
+        		/* Register Number */
+        		tx->msg[2]=rx->msg[2];
+        		tx->msg[3]=rx->msg[3];
+        		/* Register Value */
+        		tx->msg[4]=rx->msg[4];
+        		tx->msg[5]=rx->msg[5];
+        		tx->length=6;
+        	}
     }/* Кінець функції 06*/
     else if(Funk_Mod==0x10){
     	uint16_t StartingAddress     = rx->msg[2]*0x100+rx->msg[3];
-    	uint16_t QuantityOfRegisters = rx->msg[4]*0x100+rx->msg[4];
-    	uint16_t ByteCntr            = rx->msg[5];
-    	if(QuantityOfRegisters!= ByteCntr*2){
+    	uint16_t QuantityOfRegisters = rx->msg[4]*0x100+rx->msg[5];
+    	uint16_t ByteCntr            = rx->msg[6];
+    	if((QuantityOfRegisters*2)!= ByteCntr){
     		ExFlag=0x03;
     	}
     	else{
+    		/*Пишемо за один раз всі налаштування користувача */
     		if((StartingAddress==0x2000)&&(QuantityOfRegisters==0x20)){
+    			uint16_t value_i=0;
+    			value_i=rx->msg[7+0x00]*0x100+rx->msg[7+0x01];
+    			user_settings.oper_mode=(oper_mode_t)value_i;
+    		}
+    		/*Пишемо за один раз всі налаштування виробника */
+    		else if((StartingAddress==0x2020)&&(QuantityOfRegisters==0x20)){
+    			uint16_t dec=0;
+    			uint16_t fra=0;
 //    			float amperageAclbr; 	// 0х2000
-    			fSet.amperageAclbr=(float)rx->msg[6+0x00]+((float)rx->msg[6+ 0x01])/1000.f;
+    			dec=rx->msg[7+0x00]*0x100+rx->msg[7+ 0x01];
+    			fra=rx->msg[7+0x02]*0x100+rx->msg[7+ 0x03];
+    			fSet.amperageAclbr=(float)dec+(float)fra/10000.f;
+
 //    			float clbr_iA;			// 0х2002
-    			fSet.clbr_iA      =(float)rx->msg[6+0x02]+((float)rx->msg[6+ 0x03])/1000.f;
-//    			float amperageBclbr;	// 0х2004
-    			fSet.amperageBclbr=(float)rx->msg[6+0x04]+((float)rx->msg[6+ 0x05])/1000.f;
+    			dec=rx->msg[7+0x04]*0x100+rx->msg[7+ 0x05];
+    			fra=rx->msg[7+0x06]*0x100+rx->msg[7+ 0x07];
+    			fSet.clbr_iA=(float)dec+(float)fra/10000.f;
+
+//    			float amperageBclbr; 	// 0х2004
+    			dec=rx->msg[7+0x08]*0x100+rx->msg[7+ 0x09];
+    			fra=rx->msg[7+0x0A]*0x100+rx->msg[7+ 0x0B];
+    			fSet.amperageBclbr=(float)dec+(float)fra/10000.f;
+
 //    			float clbr_iB;			// 0х2006
-    			fSet.clbr_iB      =(float)rx->msg[6+0x06]+((float)rx->msg[6+ 0x07])/1000.f;
-//    			float amperageCclbr;    // 0х2008
-    			fSet.amperageCclbr=(float)rx->msg[6+0x08]+((float)rx->msg[6+ 0x09])/1000.f;
-//    			float clbr_iC;	        // 0х200A
-    			fSet.clbr_iC      =(float)rx->msg[6+0x0A]+((float)rx->msg[6+ 0x0B])/1000.f;
-//    			float voltageCclbr;		// 0х200C
-    			fSet.voltageCclbr =(float)rx->msg[6+0x0C]+((float)rx->msg[6+ 0x0D])/1000.f;
+    			dec=rx->msg[7+0x0C]*0x100+rx->msg[7+ 0x0D];
+    			fra=rx->msg[7+0x0E]*0x100+rx->msg[7+ 0x0F];
+    			fSet.clbr_iB=(float)dec+(float)fra/10000.f;
+
+//    			float amperageCclbr; 	// 0х2008
+    			dec=rx->msg[7+0x10]*0x100+rx->msg[7+ 0x11];
+    			fra=rx->msg[7+0x12]*0x100+rx->msg[7+ 0x13];
+    			fSet.amperageCclbr=(float)dec+(float)fra/10000.f;
+
+//    			float clbr_iC;			// 0х200A
+    			dec=rx->msg[7+0x14]*0x100+rx->msg[7+ 0x15];
+    			fra=rx->msg[7+0x16]*0x100+rx->msg[7+ 0x17];
+    			fSet.clbr_iC=(float)dec+(float)fra/10000.f;
+
+//    			fSet.voltageCclbr		//0x200C
+    			dec=rx->msg[7+0x18]*0x100+rx->msg[7+ 0x19];
+    			fra=rx->msg[7+0x1A]*0x100+rx->msg[7+ 0x1B];
+    			fSet.voltageCclbr=(float)dec+(float)fra/10000.f;
+
 //    			float clbr_uC;			// 0х200E
-    			fSet.clbr_uC      =(float)rx->msg[6+0x0E]+((float)rx->msg[6+ 0x0F])/1000.f;
+    			dec=rx->msg[7+0x1C]*0x100+rx->msg[7+ 0x1D];
+    			fra=rx->msg[7+0x1E]*0x100+rx->msg[7+ 0x1F];
+    			fSet.clbr_iC=(float)dec+(float)fra/10000.f;
+
 //    			uint16_t DeviceMode;     //0x1010 Типорозмір контролера 1...5
-    			fSet.DeviceMode   =rx->msg[6+0x10];
+    			uint16_t value =0;
+    			value=rx->msg[7+0x20]*0x100+rx->msg[7+0x21];
+    			fSet.DeviceMode   =value;
+
 //    			uint16_t Faznost;		 //0x1011
-    			fSet.Faznost      =rx->msg[6+0x11];
+    			value=rx->msg[7+0x22]*0x100+rx->msg[7+0x24];
+    			fSet.Faznost   =value;
+
+//
+
 //    			uint32_t xx12;       	 //0x1012
 //
 //    			uint32_t xx14;			 //0x1014
@@ -295,9 +392,19 @@ void fTK5_Slave1(
 //
 //    			uint32_t xx1C;			//0x101C
     		}
+
     		else{
     			ExFlag=0x02;
     		}
+    	}
+    	if (ExFlag == 0){
+    		/* StartingAddress */
+    		tx->msg[2]=rx->msg[2];
+    		tx->msg[3]=rx->msg[3];
+    		/* QuantityOfRegisters */
+    		tx->msg[4]=rx->msg[4];
+    		tx->msg[5]=rx->msg[5];
+    		tx->length=6;
     	}
     } /* Кінець функції 0x10 (16)*/
     else if(Funk_Mod==0x11){
@@ -500,8 +607,37 @@ static uint8_t f_0x0090_20m(uint16_t *res){
      return Ex;
 }
 
-
-//
+/* Ця функція перетворює число з плаваючою крапкою
+ * на послідовність чотирьох байт в вихідному повідомлення Модбас
+ * функції 0х03
+ * починаючи з заданого номера байта + 3
+ * (0-адрес модбас,1-код функції, 2 - кількість байт)
+ * Функція повертає:
+      0, якщо все Ок
+     -1, якщо не має показчика або номер байта не кратний 4    */
+static int8_t f_03_float_to_Tx(
+		float af,                  // вхідне число
+		modbus_slave_tx_msg_t *tx, // показчик на вихідне повідомлення Модбас
+		uint16_t i){               // номер байта, з якого записати число float в чотири байти
+	if (tx==NULL)  {return -1;}
+	if ((i%4)!= 0) {return -1;}
+	uint16_t regfloat[2]={0};
+	f_float_to_2x16(af, regfloat);
+	tx->msg[3+i+0x00] = regfloat[0] / 0x100;
+	tx->msg[3+i+0x01] = regfloat[0] % 0x100;
+	tx->msg[3+i+0x02] = regfloat[1] / 0x100;
+	tx->msg[3+i+0x03] = regfloat[1] % 0x100;
+	return 0;
+}
+/* Ця функція перетворює число з плаваючою крапкою
+ * на масив з двох чисел - цілою частини float
+ * та дробної частини float перші чотири десятичні цифри
+ * Аргументи =
+ * 		вхідне число float af
+ * 		показчик на масив двох числе int16_t
+ * Функція повертає
+ *      0, якщо все Ок
+ *      -1,якщо число надто велике або немає показчика на масив*/
 static int8_t f_float_to_2x16(float af, uint16_t *ptwo){
 	if((af>65000.0f)||(ptwo==NULL)){	return -1;}
 	else {

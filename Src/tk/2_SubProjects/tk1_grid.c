@@ -149,7 +149,7 @@ static adcf_t sumNegativeAmperage_adc=0;
 static adcf_t aNeutralAmperage_adc=0;
 static adcf_t bNeutralAmperage_adc=0;
 static adcf_t cNeutralAmperage_adc=0;
-static adcf_t sumNeutralAmperage_adc=0;
+//static adcf_t sumNeutralAmperage_adc=0;
 /*Струм у попугаях та фаза в градусах (незглажені)
  * обчислені у кожному циклі контролера */
 volatile static ifurie_out_t iAfurie_out = {0};
@@ -393,7 +393,7 @@ grid_calc_status_t f_GRD_Calc(grid_t *hg){
 	    if(!((gcs == GRID_clc_OK) || (gcs == GRID_clc_Impossible))){break;}
 
 	    gcs=f_grid_harmonics_calc(hg);
-	    if(!((gcs == GRID_clc_OK) || (gcs == GRID_clc_Impossible))){break;}
+//	    if(!((gcs == GRID_clc_OK) || (gcs == GRID_clc_Impossible))){break;}
 	    gcs=f_grid_harmonics2_calc(hg);
 	    if(!((gcs == GRID_clc_OK) || (gcs == GRID_clc_Impossible))){break;}
 	    gcs= f_grid_power_calc(hg);
@@ -874,8 +874,8 @@ static grid_calc_status_t f_grid_reactive_calc(grid_t *hg){
 		}
 		else{}
 		PowerFactor = 100.0f*cosf(M_PI * u_i_Phi/180.0f);
-		hg->LoadType		= gloadtype;
-		hg->PowerFactor_pro = PowerFactor;
+//		hg->LoadType		= gloadtype;
+//		hg->PowerFactor_pro = PowerFactor;
 
 
 		/* Для трихфазного струму і електродвигуна обчислюємо послідовність фаз */
@@ -949,7 +949,7 @@ static grid_calc_status_t f_grid_reactive_calc(grid_t *hg){
 			else{
 				phrotation=PhasesSequenceFault;
 			}
-			hg->PhaseRotation	= phrotation;
+//			hg->PhaseRotation	= phrotation;
 		}
 
 #ifdef U_I_PHI_DEBUG
@@ -977,8 +977,13 @@ static grid_calc_status_t f_grid_reactive_calc(grid_t *hg){
 		tkDisplay_PutLowStr(str);
 	}
 #endif //COS_FI_CALC_PRINT0
+
+
 		grc_status=GRID_OK;
 	}
+	hg->LoadType		= gloadtype;
+	hg->PhaseRotation	= phrotation;
+	hg->PowerFactor_pro = PowerFactor;
 	return grc_status;
 
 }
@@ -1155,19 +1160,41 @@ static grid_calc_status_t f_grid_unbalance_factor_calc(
 static grid_calc_status_t f_grid_harmonics_calc(grid_t *hg){
 	grid_calc_status_t hfc=GRID_clc_UnKnown;
 	while(hfc==GRID_clc_UnKnown){
+		/* Для обчислення повної долі гармонік ми віднімаємо
+		 * від теплового струму(по Є.Т,) струм першої гармоніки (по В.К)
+		 * очевидно, що при виключеному електроживлення ми віднімаємо помилку від помилки,
+		 * тому:*/
+		bool ub=(uCfurie_out.u1harm_ampl>(lLimitRms*rated220AdcVoltage/100.0f));
+		/* амплітуда першої гармоніки струму фази С не нижче заданої   */
+		bool ib=(iCfurie_out.rms_fundamental>(lLimitRms*ratedAdcAmperage/100.0f));
+		bool ui=ub&&ib;
+		if (!ui){
+			aTotalHarmonicDistortion=0;
+			bTotalHarmonicDistortion=0;
+			cTotalHarmonicDistortion=0;
+			THDi_HarmonicAmperageDistortion=0;
+			THDi_HarmonicAmperageDistortion=0;
+			HarmonicsDeratingFactor=100.0f;
+			break;
+		}
+
+
+
 		/*********************************************************/
 		float cD2 =   (cAdcAmperage*cAdcAmperage)
 									   -(cAdc1Amperage*cAdc1Amperage);
 		if (cD2<=0){cD2=0;}
 		cTotalHarmonicDistortion=
 				   100.0f*M_SQRT1_2*sqrtf(cD2)/cAdc1Amperage;
-		hg->cTotalHarmonicDistortion=cTotalHarmonicDistortion*0.85f;
-	    hg->THDi_HarmonicAmperageDistortion=THDi_HarmonicAmperageDistortion*0.85f;
+//		hg->cTotalHarmonicDistortion=cTotalHarmonicDistortion*0.85f;
+//	    hg->THDi_HarmonicAmperageDistortion=THDi_HarmonicAmperageDistortion*0.85f;
 		/*********************************************************/
 	    float THDi=0;
 	    if (fs.Faznost==1){
+			bTotalHarmonicDistortion=0;
+			cTotalHarmonicDistortion=0;
 			THDi_HarmonicAmperageDistortion=cTotalHarmonicDistortion;
-			hg->THDi_HarmonicAmperageDistortion=THDi_HarmonicAmperageDistortion*0.85f;
+//			hg->THDi_HarmonicAmperageDistortion=THDi_HarmonicAmperageDistortion*0.85f;
 			/* Для однофазного електродвигуна */
 			THDi=cTotalHarmonicDistortion;
 
@@ -1186,8 +1213,8 @@ static grid_calc_status_t f_grid_harmonics_calc(grid_t *hg){
 	 	   bTotalHarmonicDistortion=
 	 			   100.0f*M_SQRT1_2*sqrtf(bD2)/bAdc1Amperage;
 
-	 	   hg->aTotalHarmonicDistortion=aTotalHarmonicDistortion*0.85f;
-	 	   hg->bTotalHarmonicDistortion=bTotalHarmonicDistortion*0.85f;
+//	 	   hg->aTotalHarmonicDistortion=aTotalHarmonicDistortion*0.85f;
+//	 	   hg->bTotalHarmonicDistortion=bTotalHarmonicDistortion*0.85f;
 	    }
 	    else{}
 
@@ -1222,15 +1249,23 @@ static grid_calc_status_t f_grid_harmonics_calc(grid_t *hg){
 				HarmonicsDeratingFactor = 100.0f/(1.0f+thdi*thdi);
 				THDi_HarmonicAmperageDistortion = THDi;
 			}
-			hg->THDi_HarmonicAmperageDistortion=THDi_HarmonicAmperageDistortion*0.85f;
-			hg->HarmonicsDeratingFactor_pro=HarmonicsDeratingFactor;
+//			hg->THDi_HarmonicAmperageDistortion=THDi_HarmonicAmperageDistortion*0.85f;
+//			hg->HarmonicsDeratingFactor_pro=HarmonicsDeratingFactor;
 		}
 		else{
-			hg->HarmonicsDeratingFactor_pro=0;
-		}
+			HarmonicsDeratingFactor=100.0f;
+//			hg->HarmonicsDeratingFactor_pro=100.0f;
 
-	hfc=GRID_clc_OK;
+		}
+		hfc=GRID_clc_OK;
 	}
+	hg->aTotalHarmonicDistortion=aTotalHarmonicDistortion*0.85f;
+	hg->bTotalHarmonicDistortion=bTotalHarmonicDistortion*0.85f;
+	hg->cTotalHarmonicDistortion=cTotalHarmonicDistortion*0.85f;
+	hg->THDi_HarmonicAmperageDistortion=THDi_HarmonicAmperageDistortion*0.85f;
+	hg->HarmonicsDeratingFactor_pro=HarmonicsDeratingFactor;
+
+
 	return hfc;
 }
 
@@ -1289,8 +1324,8 @@ static grid_calc_status_t f_grid_harmonics2_calc(grid_t *hg){
 								&new
 					   			);
 		cNeutralAmperage_adc=new;
-		hg->cNegativeAmperage_A=fs.clbr_iC*cNegativeAmperage_adc*0.85f;
-		hg->cNeutralAmperage_A=fs.clbr_iC*cNeutralAmperage_adc*0.85f;
+//		hg->cNegativeAmperage_A=fs.clbr_iC*cNegativeAmperage_adc*0.85f;
+//		hg->cNeutralAmperage_A=fs.clbr_iC*cNeutralAmperage_adc*0.85f;
 
 	    if (fs.Faznost==3){
 	    	/* Струми, які обертають двигун в протилежну сторону*/
@@ -1335,15 +1370,40 @@ static grid_calc_status_t f_grid_harmonics2_calc(grid_t *hg){
 								&new
 					   			);
 	    	bNeutralAmperage_adc=new;
-	    	sumNeutralAmperage_adc=cNeutralAmperage_adc+cNeutralAmperage_adc+cNeutralAmperage_adc;
-	    	hg->aNegativeAmperage_A=fs.clbr_iA*aNegativeAmperage_adc*0.85f;
-	    	hg->bNegativeAmperage_A=fs.clbr_iB*bNegativeAmperage_adc*0.85f;
+	    	adcf_t sumNeutralAmperage_adc=0;
+	    	if(fs.Faznost==3){
+	    		hg->aNegativeAmperage_A=fs.clbr_iA*aNegativeAmperage_adc*0.85f;
+	    		hg->bNegativeAmperage_A=fs.clbr_iB*bNegativeAmperage_adc*0.85f;
 
+	    		hg->aNeutralAmperage_A=fs.clbr_iA*aNeutralAmperage_adc*0.85f;
+	    		hg->bNeutralAmperage_A=fs.clbr_iB*bNeutralAmperage_adc*0.85f;
 
-	    	hg->aNeutralAmperage_A=fs.clbr_iA*aNeutralAmperage_adc*0.85f;
-	    	hg->bNeutralAmperage_A=fs.clbr_iB*bNeutralAmperage_adc*0.85f;
-	    	hg->sumNeutralAmperage_A=sumNeutralAmperage_adc*0.85f;
+	    		hg->cNegativeAmperage_A=fs.clbr_iC*cNegativeAmperage_adc*0.85f;
+	    		hg->cNeutralAmperage_A=fs.clbr_iC*cNeutralAmperage_adc*0.85f;
+	    		if(us.oper_mode ==LowVoltageInductionMotorsProtection){
+	    			sumNeutralAmperage_adc=cNeutralAmperage_adc+cNeutralAmperage_adc+cNeutralAmperage_adc;
+	    			hg->sumNeutralAmperage_A=sumNeutralAmperage_adc*0.85f;
+	    		}
+	    		else{
+	    			hg->sumNeutralAmperage_A=0;
+	    		}
 
+	    	}
+	    	else if(fs.Faznost==1){
+	    		hg->aNegativeAmperage_A=0;
+	    		hg->bNegativeAmperage_A=0;
+
+	    		hg->aNeutralAmperage_A=0;
+	    		hg->bNeutralAmperage_A=0;
+
+	    		hg->cNegativeAmperage_A=fs.clbr_iC*cNegativeAmperage_adc*0.85f;
+	    		hg->cNeutralAmperage_A=fs.clbr_iC*cNeutralAmperage_adc*0.85f;
+
+	    		hg->sumNeutralAmperage_A=0;
+
+	    		hg->cNegativeAmperage_A=fs.clbr_iC*cNegativeAmperage_adc*0.85f;
+	    		hg->cNeutralAmperage_A=fs.clbr_iC*cNeutralAmperage_adc*0.85f;
+	    	}
 	    }
 		hfc=GRID_clc_OK;
 	}

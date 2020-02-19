@@ -50,7 +50,7 @@ static int16_t f_grid_to_modbus_regs(grid_t *g, uint16_t *m, uint16_t n){
 
 	/* Косинус фі*/
 
-	m[0x12]=dc(g->PowerFactor_pro);
+	m[0x12]=dc(g->PowerFactor_pro);			m[0x16]=fr(g->PowerFactor_pro);
 	/* Тільки для електродвигуна, якщо навантаження не двигун - не має сенсу
 	NEMA (National Electric Manufacturers Associations of the
 	USA) Std. (1993) - визначення коефіцієнта асиметрії:
