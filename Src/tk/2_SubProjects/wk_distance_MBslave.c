@@ -377,7 +377,7 @@ void fTK5_Slave1(
     			fSet.DeviceMode   =value;
 
 //    			uint16_t Faznost;		 //0x1011
-    			value=rx->msg[7+0x22]*0x100+rx->msg[7+0x24];
+    			value=rx->msg[7+0x22]*0x100+rx->msg[7+0x23];
     			fSet.Faznost   =value;
 
 //
