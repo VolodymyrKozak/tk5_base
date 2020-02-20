@@ -570,6 +570,7 @@ static grid_calc_status_t f_grid_voltage_calc(grid_t *hg){
 	return GRID_OK;
 }
 
+
 /* Ця функція:
    1) обробляє масиви відліків АЦП струмів iAfurie_out, iВfurie_out, iСfurie_out (по 18 відліків)
 		  відліки iFurieLeak обчислюються як алгебраїчні суми відліків АЦП трьох фазних струмів
@@ -607,7 +608,7 @@ static grid_calc_status_t f_grid_amperage_calc(grid_t *hg){
 	f_ExponentialSmoothing  (
 								iCheat_out.permanent_component,
 					   			cAdc0Amperage,
-					    		20.0f,
+					    		2.0f,
 					   			10.0f,
 								&newSglPermComp
 					   			);
@@ -675,7 +676,7 @@ static grid_calc_status_t f_grid_amperage_calc(grid_t *hg){
 		f_ExponentialSmoothing  (
 									iAheat_out.permanent_component,
 						   			aAdc0Amperage,
-						    		20.0f,
+						    		2.0f,
 						   			10.0f,
 									&newSglPermComp
 						   			);
@@ -684,7 +685,7 @@ static grid_calc_status_t f_grid_amperage_calc(grid_t *hg){
 		f_ExponentialSmoothing  (
 									iBheat_out.permanent_component,
 						   			bAdc0Amperage,
-						    		20.0f,
+						    		2.0f,
 						   			10.0f,
 									&newSglPermComp
 						   			);
