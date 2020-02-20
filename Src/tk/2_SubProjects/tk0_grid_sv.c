@@ -148,17 +148,18 @@ static int16_t f_grid_to_modbus_regs(grid_t *g, uint16_t *m, uint16_t n){
 
 	m[0x36]=dc(g->leakFurie);			m[0x37]=fr(g->leakFurie);
 
-//	m[0x38]=(uint16_t)(g->leakFuriePhase);m[0x39]=0x39;
+	m[0x38]=(uint16_t)(g->leakFuriePhase);m[0x39]=0x39;
 
 
 
-	m[0x38]=g->mPOPUGAYS;
-	m[0x38]=g->kPOPUGAYS;
+
 
 
 	m[0x3A]=dc(g->MotorHeatProcentage);	m[0x3B]=fr(g->MotorHeatProcentage);
 	m[0x3C]=0x3C;	m[0x3D]=0x3D;
-	m[0x3E]=0x3E;	m[0x3F]=0x3F;
+//	m[0x3E]=0x3E;	m[0x3F]=0x3F;
+	m[0x3E]=g->mPOPUGAYS;
+	m[0x3F]=g->kPOPUGAYS;
 	return 0;
 }
 

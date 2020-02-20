@@ -11618,8 +11618,7 @@ LOAD c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.17
  *fill*         0x08004e76        0x2 
  .text.fr       0x08004e78       0x28 Src/tk/2_SubProjects/tk0_grid_sv.o
  .text.f_grid_to_modbus_regs
-                0x08004ea0      0x226 Src/tk/2_SubProjects/tk0_grid_sv.o
- *fill*         0x080050c6        0x2 
+                0x08004ea0      0x228 Src/tk/2_SubProjects/tk0_grid_sv.o
  .text.GRID_Init
                 0x080050c8       0x14 Src/tk/2_SubProjects/tk0_grid_sv.o
                 0x080050c8                GRID_Init
