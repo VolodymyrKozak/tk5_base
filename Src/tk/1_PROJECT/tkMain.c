@@ -69,11 +69,13 @@ static uint32_t MesETCntrOld=0;
 /* Прапор запису на флеш налаштувань виробника
  * піднімається в wk_distance_MBslave.c/h
  * командою дистанційного управління через МОДБАС*/
-volatile FunctionalState UserSetWriteFlag = 0;
+volatile FunctionalState UserSetWriteFlashFlag = 0;
 /* Прапор запису на флеш налаштувань користувача
  * піднімається в wk_distance_MBslave.c/h
  * командою дистанційного управління через МОДБАС*/
-volatile FunctionalState FactorySetWriteFlag = 0;
+volatile FunctionalState FactorySetWriteFlashFlag = 0;
+volatile FunctionalState FactorySetWriteMemoryFlag = 0;
+volatile FunctionalState UserSetWriteMemoryFlag = 0;
 /****************************************************************/
 tkMAIN_status_t tkInit(void){
 /****************************************************************/
@@ -258,18 +260,28 @@ tkMAIN_status_t tkLoop(void){
 		tkDisplay_PutLowStr(st);
 	}
 #endif
+	if(FactorySetWriteMemoryFlag==ENABLE){
+		GRID_Init();
+		FactorySetWriteMemoryFlag=DISABLE;
+	}
+	if(UserSetWriteFlashFlag==ENABLE){
+		GRID_Init();
+		UserSetWriteFlashFlag=DISABLE;
+	}
+
 	/* Якщо отримали команду записати налаштування виробника на флеш - записати */
-	if(FactorySetWriteFlag==ENABLE){
+	if(FactorySetWriteFlashFlag==ENABLE){
 		flash_status_t fs = FLASH_UNKNOWN_Err;
 		fs=f_VV300_FactorySets_Write();
 		if (fs != FLASH_OK){
 			f_PutErrRecord(ERR fs);
 //			tkI=tkMAIN_FLASHErr;break;
 		}
-		FactorySetWriteFlag=DISABLE;
+		GRID_Init();
+		FactorySetWriteFlashFlag=DISABLE;
 	}
 	/* Якщо отримали команду записати налаштування користувача на флеш - записати */
-	if(UserSetWriteFlag==ENABLE){
+	if(UserSetWriteFlashFlag==ENABLE){
 		flash_status_t fs = FLASH_UNKNOWN_Err;
 		fs=f_VV300_UserSets_Write();
 		if (f_VV300_UserSets_Write() != FLASH_OK){
@@ -277,7 +289,8 @@ tkMAIN_status_t tkLoop(void){
 //			tkI=tkMAIN_FLASHErr;
 //			break;
 		}
-		UserSetWriteFlag=DISABLE;
+		GRID_Init();
+		UserSetWriteFlashFlag=DISABLE;
 	}
 
 

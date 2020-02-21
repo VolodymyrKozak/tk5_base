@@ -96,12 +96,13 @@ extern on_off_t AutoCtrl;
  /* Прапор запису на флеш налаштувань виробника
   * піднімається в wk_distance_MBslave.c/h
   * командою дистанційного управління через МОДБАС*/
- extern volatile FunctionalState UserSetWriteFlag;
+ extern volatile FunctionalState UserSetWriteFlashFlag;
  /* Прапор запису на флеш налаштувань користувача
   * піднімається в wk_distance_MBslave.c/h
   * командою дистанційного управління через МОДБАС*/
- extern volatile FunctionalState FactorySetWriteFlag;
-
+ extern volatile FunctionalState FactorySetWriteFlashFlag;
+ extern volatile FunctionalState FactorySetWriteMemoryFlag;
+ extern volatile FunctionalState UserSetWriteMemoryFlag;
  /* Вхід симуляції від Модбас */
  extern uint16_t AmplMode; /* 0- синусоїдальна
   	 	 	 	 	 	   1- прямокутна*/
@@ -262,11 +263,11 @@ void fTK5_Slave1(
         	break;
         	case 0x0010:
         		/* Команда запису на флеш налаштувань користувача    */
-        		UserSetWriteFlag=(FunctionalState)RegValue;
+        		UserSetWriteFlashFlag=(FunctionalState)RegValue;
         	break;
         	case 0x0011:
         		/* Команда запису на флеш налаштувань   виробника */
-        		FactorySetWriteFlag=(FunctionalState)RegValue;
+        		FactorySetWriteFlashFlag=(FunctionalState)RegValue;
         	break;
 //        	case 0x1000:
 //        		if (RegValue<2){
@@ -326,6 +327,9 @@ void fTK5_Slave1(
     			uint16_t value_i=0;
     			value_i=rx->msg[7+0x00]*0x100+rx->msg[7+0x01];
     			user_settings.oper_mode=(oper_mode_t)value_i;
+
+
+    			UserSetWriteMemoryFlag=ENABLE;
     		}
     		/*Пишемо за один раз всі налаштування виробника */
     		else if((StartingAddress==0x2020)&&(QuantityOfRegisters==0x20)){
@@ -391,6 +395,8 @@ void fTK5_Slave1(
 //    			uint32_t xx1A;			//0x101A
 //
 //    			uint32_t xx1C;			//0x101C
+    			FactorySetWriteMemoryFlag=ENABLE;
+
     		}
 
     		else{
