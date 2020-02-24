@@ -39,9 +39,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "adc.h"
-#include "tkConfig.h"
+#include "tk/1_PROJECT/tkConfig.h"
 #include "string.h"
-#include "vkDeclarations.h"
+#include "tk/3_Libraries/vkDeclarations.h"
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */

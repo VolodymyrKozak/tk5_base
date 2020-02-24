@@ -8,14 +8,14 @@
 #include "gpio.h"
 #include "tim.h"
 #include <stdio.h>
-#include <tk1_grid.h>
-#include <vv300set_factory.h>
-#include "wk_motor_commands.h"
+#include "../2_SubProjects/tk1_grid.h"
+#include "../2_SubProjects/vv300set_factory.h"
+#include "../2_SubProjects/wk_motor_commands.h"
 #include "stm32f1xx_it.h"
-#include "tk0_grid_sv.h"
+#include "../2_SubProjects/tk0_grid_sv.h"
 //#include "../1_PROJECT/tkConfig.h"
-#include "pr_OVEN_cmi.h"
-#include "vkDeclarations.h"
+#include "../4_TK4DEBUG/pr_OVEN_cmi.h"
+#include "../3_Libraries/vkDeclarations.h"
 //#include "iwdg.h"
 //#include "iwdg.h"
 
@@ -40,9 +40,9 @@
 #include "string.h"
 #include "../2_SubProjects/wk_atime64.h"
 #include "../1_PROJECT/tkErr_Handler.h"
-#include "mb_slave.h"
-#include "d0_debug_main.h"
-#include "zFF.h"
+#include "../3_Libraries/tkModbus/mb_slave.h"
+#include "../4_TK4DEBUG/d0_debug_main.h"
+#include "../4_TK4DEBUG/zFF.h"
 //#include "tk0spv.h"
 /* Зглажена частота в герцах для управління таймером відліків Фур'є	  */
 

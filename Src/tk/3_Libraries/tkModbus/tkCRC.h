@@ -8,7 +8,8 @@
 #ifndef TKCRC_H_
 #define TKCRC_H_
 
-#include "tkConfig.h"
+#include "../../1_PROJECT/tkConfig.h"
+
 #include "mb.h"
 #include "stdint.h"
 

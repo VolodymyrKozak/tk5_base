@@ -32,8 +32,9 @@ Src/tk/2_SubProjects/wk_motor_ctrl.o: \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/vkDeclarations.h
+ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h \
+ ../Src/tk/2_SubProjects/../1_PROJECT/tkConfig.h \
+ ../Src/tk/2_SubProjects/../3_Libraries/vkDeclarations.h
 
 ../Src/tk/2_SubProjects/wk_motor_ctrl.h:
 
@@ -99,6 +100,8 @@ C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h:
+c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/vkDeclarations.h:
+../Src/tk/2_SubProjects/../1_PROJECT/tkConfig.h:
+
+../Src/tk/2_SubProjects/../3_Libraries/vkDeclarations.h:

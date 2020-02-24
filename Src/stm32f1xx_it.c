@@ -33,17 +33,18 @@
   */
 /* USER CODE END Header */
 
+
 /* Includes ------------------------------------------------------------------*/
-#include <tk1_grid.h>
-#include <vkButtonsADC.h>
-#include <vv300set_factory.h>
+#include "tk/2_SubProjects/tk1_grid.h"
+//#include <vkButtonsADC.h>
+#include "tk/2_SubProjects/vv300set_factory.h"
 #include "main.h"
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "tkConfig.h"
-#include "vkDeclarations.h"
-#include "../3_Libraries/tkSGL.h"
+#include "tk/1_PROJECT/tkConfig.h"
+#include "tk/3_Libraries/vkDeclarations.h"
+#include "tk/3_Libraries/tkSGL.h"
 //"../1_PROJECT/tkConfig.h"
 /* USER CODE END Includes */
 

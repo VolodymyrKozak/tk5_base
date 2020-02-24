@@ -8,7 +8,7 @@
 #ifndef TKMODBUSMASTER1_H_
 #define TKMODBUSMASTER1_H_
 
-#include <tkConfig.h>
+#include "../../1_PROJECT/tkConfig.h"
 
 #ifdef  MODBUS_MASTER_for_TK2
 #include "usart.h"

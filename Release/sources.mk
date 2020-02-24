@@ -16,13 +16,14 @@ C_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Drivers/STM32F1xx_HAL_Driver/Src \
-Drivers/tkLibraries/time64 \
-Drivers/tkLibraries \
-Drivers/tkLibraries/tkGrid \
-Drivers/tkLibraries/tkMenu \
-Drivers/tkLibraries/tkModbus \
-Drivers/tkPROJECT \
-Drivers/tkSubProjects \
 Src \
+Src/tk/1_PROJECT \
+Src/tk/2_SubProjects \
+Src/tk/3_Libraries/time64 \
+Src/tk/3_Libraries \
+Src/tk/3_Libraries/tkGrid \
+Src/tk/3_Libraries/tkModbus \
+Src/tk/4_TK4DEBUG \
+Src/tk/4_TK4DEBUG/tkMenu \
 startup \
 

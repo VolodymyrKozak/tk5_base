@@ -47,7 +47,7 @@
 /** @addtogroup STM32F1xx_HAL_Driver
   * @{
   */
-#include "tkConfig.h"
+#include "../Src/tk/1_PROJECT/tkConfig.h"
 /** @addtogroup UART
   * @{
   */

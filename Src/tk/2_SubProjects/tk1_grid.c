@@ -3,7 +3,7 @@
  *  Created on: 27 груд. 2018 р.
  *      Author: KozakVF
  */
-#include "tkConfig.h"
+#include "../1_PROJECT/tkConfig.h"
 
 #include "tk1_grid.h"
 #include "math.h"
@@ -11,22 +11,22 @@
 
 #include "stdint.h"
 #include "gpio.h"
-#include "tkSGL.h"
+#include "../3_Libraries/tkSGL.h"
 #include "adc.h"
 #include "tim.h"
 #include "float.h"
-#include "tkFurie.h"
+#include "../3_Libraries/tkGrid/tkFurie.h"
 #include "wk_atime64.h"
 #include "string.h"
-#include "tk_wh1602b3.h"
-#include "vkDeclarations.h"
-#include "vkButtonsADC.h"
+#include "../4_TK4DEBUG/tk_wh1602b3.h"
+#include "../3_Libraries/vkDeclarations.h"
+//#include "vkButtonsADC.h"
 
 #include "wk_motor_ctrl.h"
 
-#include "zFF.h"
+#include "../4_TK4DEBUG/zFF.h"
 
-#include "d0_debug_main.h"
+#include "../4_TK4DEBUG/d0_debug_main.h"
 
 
 extern void ADC_ConvInit(void);

@@ -42,7 +42,7 @@
 #ifdef __cplusplus
  extern "C" {
 #endif
-#include "tkConfig.h"
+#include "../Src/tk/1_PROJECT/tkConfig.h"
 #ifdef ENABLE_I2C
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"

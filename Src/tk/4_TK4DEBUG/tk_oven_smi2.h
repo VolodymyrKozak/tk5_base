@@ -8,7 +8,7 @@
 #ifndef TK_OVEN_SMI2_H_
 #define TK_OVEN_SMI2_H_
 
-#include <tkConfig.h>
+#include "../1_PROJECT/tkConfig.h"
 
 #ifdef   MODBUS_MASTER_for_OVEN_INDICATOR
 #include <stdio.h>

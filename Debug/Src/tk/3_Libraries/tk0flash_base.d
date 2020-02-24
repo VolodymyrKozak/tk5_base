@@ -1,6 +1,6 @@
 Src/tk/3_Libraries/tk0flash_base.o: ../Src/tk/3_Libraries/tk0flash_base.c \
  ../Src/tk/3_Libraries/../3_Libraries/tk0flash_base.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h \
+ ../Src/tk/3_Libraries/../3_Libraries/../1_PROJECT/tkConfig.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/crc.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/main.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
@@ -33,11 +33,12 @@ Src/tk/3_Libraries/tk0flash_base.o: ../Src/tk/3_Libraries/tk0flash_base.c \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
+ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h \
  ../Src/tk/3_Libraries/../3_Libraries/tkErrLib.h
 
 ../Src/tk/3_Libraries/../3_Libraries/tk0flash_base.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h:
+../Src/tk/3_Libraries/../3_Libraries/../1_PROJECT/tkConfig.h:
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/crc.h:
 
@@ -102,5 +103,7 @@ C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1
 C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
+
+c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h:
 
 ../Src/tk/3_Libraries/../3_Libraries/tkErrLib.h:

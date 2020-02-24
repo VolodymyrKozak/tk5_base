@@ -1,6 +1,6 @@
 Src/tk/3_Libraries/tkErrLib.o: ../Src/tk/3_Libraries/tkErrLib.c \
  ../Src/tk/3_Libraries/../3_Libraries/tkErrLib.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h \
+ ../Src/tk/3_Libraries/../1_PROJECT/tkConfig.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/stm32f1xx_hal_conf.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
@@ -30,11 +30,12 @@ Src/tk/3_Libraries/tkErrLib.o: ../Src/tk/3_Libraries/tkErrLib.c \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
+ C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
+ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h
 
 ../Src/tk/3_Libraries/../3_Libraries/tkErrLib.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h:
+../Src/tk/3_Libraries/../1_PROJECT/tkConfig.h:
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 
@@ -95,3 +96,5 @@ C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1
 C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
+
+c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h:

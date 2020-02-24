@@ -8,7 +8,7 @@
 #ifndef TKLIBRARIES_TKMENU_U16SET_H_
 #define TKLIBRARIES_TKMENU_U16SET_H_
 
-#include "tkConfig.h"
+#include "../../1_PROJECT/tkConfig.h"
 #include "stdint.h"
 
 

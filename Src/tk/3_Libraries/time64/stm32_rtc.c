@@ -6,7 +6,7 @@
  */
 #include "../../3_Libraries/time64/stm32_rtc.h"
 
-#include "tkConfig.h"
+#include "../../1_PROJECT/tkConfig.h"
 #include "rtc.h"
 
 

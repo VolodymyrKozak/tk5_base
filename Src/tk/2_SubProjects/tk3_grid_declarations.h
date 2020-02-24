@@ -8,7 +8,7 @@
 #ifndef TK_2_SUBPROJECTS_TK3_GRID_DECLARATIONS_H_
 #define TK_2_SUBPROJECTS_TK3_GRID_DECLARATIONS_H_
 
-#include "tkConfig.h"
+#include "../1_PROJECT/tkConfig.h"
 typedef enum{
 	Phase_unknown,
 	Phase_A,

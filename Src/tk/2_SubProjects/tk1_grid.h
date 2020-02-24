@@ -7,8 +7,8 @@
 
 #ifndef TKLIBRARIES_TKMOTOR_TKFREQ_H_
 #define TKLIBRARIES_TKMOTOR_TKFREQ_H_
-#include "../../2_SubProjects/wk_atime64.h"
-#include "tkConfig.h"
+#include "wk_atime64.h"
+#include "../1_PROJECT/tkConfig.h"
 
 #include "vv300set_factory.h"
 #include "vv300set_user.h"

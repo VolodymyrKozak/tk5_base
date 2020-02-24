@@ -32,7 +32,7 @@ Src/tk/4_TK4DEBUG/pr_OVEN_cmi.o: ../Src/tk/4_TK4DEBUG/pr_OVEN_cmi.c \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h \
+ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h \
  ../Src/tk/4_TK4DEBUG/../1_PROJECT/tkConfig.h \
  ../Src/tk/4_TK4DEBUG/../2_SubProjects/wk_atime64.h \
  ../Src/tk/4_TK4DEBUG/../2_SubProjects/../3_Libraries/time64/stm32_rtc.h \
@@ -107,7 +107,7 @@ C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h:
+c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h:
 
 ../Src/tk/4_TK4DEBUG/../1_PROJECT/tkConfig.h:
 

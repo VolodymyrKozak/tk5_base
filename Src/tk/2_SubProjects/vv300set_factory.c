@@ -5,10 +5,11 @@
  *      Author: KozakVF
  */
 
-#include <vv300set_factory.h>
+#include "vv300set_factory.h"
 
 char X_x;  //типоразмер датчика, X_x=1..5
 char Y_y;  //типоразмер станции  Y_y=0..8
+
 
 typedef struct{
 	uint16_t iMin;
@@ -73,12 +74,12 @@ i412limit_t i412limit[9]={
 
 /* 2) визначаємо масив структур u16menu_orn_t, по елементу для кожної уставки:*/
 
-u16menu_orn_t fc[N_FCSET]={
-        				 { "koef uC", 	"k_uC",		"",	1000,  1, 1},
-    					 { "koef iA", 	"k_iA",		"",	1000,  1, 1},
-						 { "koef iB", 	"k_iB",		"",	1000,  1, 1},
-						 { "koef iC", 	"k_iC",		"",	1000,  1, 1}
-};
+//u16menu_orn_t fc[N_FCSET]={
+//        				 { "koef uC", 	"k_uC",		"",	1000,  1, 1},
+//    					 { "koef iA", 	"k_iA",		"",	1000,  1, 1},
+//						 { "koef iB", 	"k_iB",		"",	1000,  1, 1},
+//						 { "koef iC", 	"k_iC",		"",	1000,  1, 1}
+//};
      /*  присвоюємо значення елементам*/
 
 

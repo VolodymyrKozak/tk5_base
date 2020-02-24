@@ -41,7 +41,7 @@
 #include "tim.h"
 
 /* USER CODE BEGIN 0 */
-#include "tkConfig.h"
+#include "tk/1_PROJECT/tkConfig.h"
 extern volatile uint16_t peru16;
 /* USER CODE END 0 */
 

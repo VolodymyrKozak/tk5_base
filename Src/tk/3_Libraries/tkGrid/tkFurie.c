@@ -4,7 +4,7 @@
  *  Created on: 10 груд. 2018 р.
  *      Author: KozakVF
  */
-#include "tkConfig.h"
+#include "../../1_PROJECT/tkConfig.h"
 #ifdef FURIE_LIB
 #include "../../3_Libraries/tkGrid/tkFurie.h"
 #include "stdint.h"
@@ -141,16 +141,16 @@ int f_ifurie(	volatile adcf_t *pf_array,
 	/* Якщо rms першої гармоніки більша  чотирикратного номінального струму
 	 * - це пуск електродвигуна, а отже штучно множимо на 7.2,
 	 * пусковий струм, що понад пропускну спроможність АЦП */
-	if(p_ifr->rms_fundamental>4.0f*ratedAdcAmperage){
-		p_ifr->rms_fundamental=7.2f*ratedAdcAmperage;
-		//і блокуємо гармоніки
-		p_ifr->rmsZero = 0;
-		p_ifr->rmsNegative;
-	}
-	else{
+//	if(p_ifr->rms_fundamental>4.0f*ratedAdcAmperage){
+//		p_ifr->rms_fundamental=7.2f*ratedAdcAmperage;
+//		//і блокуємо гармоніки
+//		p_ifr->rmsZero = 0;
+//		p_ifr->rmsNegative;
+//	}
+//	else{
 	p_ifr->rmsZero = sqrt(sumZero)*M_SQRT1_2;
 	p_ifr->rmsNegative = sqrt(sumNegative)*M_SQRT1_2;
-	}
+//	}
 	return(0);
 }
 /* Функція обчислення rms через суму квадратів елементарних струмів*/

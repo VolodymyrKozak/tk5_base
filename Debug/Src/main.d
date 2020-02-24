@@ -30,12 +30,13 @@ Src/main.o: ../Src/main.c \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h \
+ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/adc.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/main.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/crc.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/dma.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/i2c.h \
+ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/iwdg.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/rtc.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/tim.h \
@@ -105,7 +106,7 @@ C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h:
+c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h:
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/adc.h:
 
@@ -116,6 +117,8 @@ C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/crc.h:
 C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/dma.h:
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/i2c.h:
+
+c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h:
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/iwdg.h:
 

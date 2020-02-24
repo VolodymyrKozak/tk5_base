@@ -8,7 +8,7 @@
 #ifndef TKLIBRARIES_TKMENU_ZFF_H_
 #define TKLIBRARIES_TKMENU_ZFF_H_
 
-#include "tkConfig.h"
+#include "../1_PROJECT/tkConfig.h"
 #include "stdint.h"
 
 #include "stdlib.h"
@@ -19,7 +19,7 @@
 
 #include "tk_wh1602b3.h"
 #include "tk_wo1602g.h"
-#include "vkButtonsADC.h"
+#include "../3_Libraries/vkButtonsADC.h"
 
 typedef enum {
 	dsp_OK,						/* OK, без коментарів															*/

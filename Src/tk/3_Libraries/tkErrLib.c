@@ -11,7 +11,7 @@
 
 #include "stdint.h"
 #include <stdio.h>
-#include <tkConfig.h>
+#include "../1_PROJECT/tkConfig.h"
 #include "stm32f1xx_hal.h"
 
 uint8_t errCode=0;

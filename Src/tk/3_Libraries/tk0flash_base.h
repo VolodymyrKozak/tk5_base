@@ -8,7 +8,7 @@
 #ifndef TKLIBRARIES_TK1FLASH_BASE_H_
 #define TKLIBRARIES_TK1FLASH_BASE_H_
 /* Base address of Sector 7, 128 Kbytes */
-#include <tkConfig.h>
+#include "../1_PROJECT/tkConfig.h"
 #include "stdint.h"
 #include <stdio.h>
 

@@ -4,7 +4,7 @@
  *  Created on: 27 ñ³÷. 2020 ð.
  *      Author: KozakVF
  */
-#include "tkConfig.h"
+#include "../1_PROJECT/tkConfig.h"
 #ifndef TK_2_SUBPROJECTS_TK0_GRID_SV_H_
 #define TK_2_SUBPROJECTS_TK0_GRID_SV_H_
 

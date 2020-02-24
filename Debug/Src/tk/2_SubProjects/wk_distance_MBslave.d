@@ -1,6 +1,6 @@
 Src/tk/2_SubProjects/wk_distance_MBslave.o: \
  ../Src/tk/2_SubProjects/wk_distance_MBslave.c \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/tkModbus/mb.h \
+ ../Src/tk/2_SubProjects/../3_Libraries/tkModbus/mb.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/usart.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/main.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
@@ -33,21 +33,22 @@ Src/tk/2_SubProjects/wk_distance_MBslave.o: \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/2_SubProjects/vv300set_factory.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/2_SubProjects/vv300Flash.h \
- c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\3_libraries\tk1flash2page.h \
- c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\3_libraries\tk0flash_base.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/4_TK4DEBUG/tkMenu/u16set.h \
+ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h \
+ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h \
+ ../Src/tk/2_SubProjects/vv300set_factory.h \
+ ../Src/tk/2_SubProjects/vv300Flash.h \
+ ../Src/tk/2_SubProjects/../3_Libraries/tk1flash2page.h \
+ ../Src/tk/2_SubProjects/../3_Libraries/../3_Libraries/tk0flash_base.h \
+ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h \
  ../Src/tk/2_SubProjects/vv300set_user.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/time64/stm32_rtc.h \
+ ../Src/tk/2_SubProjects/../3_Libraries/time64/stm32_rtc.h \
  c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\3_libraries\time64\time64.h \
  c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\3_libraries\time64\time64_config.h \
  ../Src/tk/2_SubProjects/wk_distance_MBslave.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/vkDeclarations.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/4_TK4DEBUG/d0_debug_main.h
+ ../Src/tk/2_SubProjects/../3_Libraries/vkDeclarations.h \
+ ../Src/tk/2_SubProjects/../4_tk4DEBUG/d0_debug_main.h
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/tkModbus/mb.h:
+../Src/tk/2_SubProjects/../3_Libraries/tkModbus/mb.h:
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Inc/usart.h:
 
@@ -113,21 +114,23 @@ C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h:
+c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/2_SubProjects/vv300set_factory.h:
+c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/2_SubProjects/vv300Flash.h:
+../Src/tk/2_SubProjects/vv300set_factory.h:
 
-c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\3_libraries\tk1flash2page.h:
+../Src/tk/2_SubProjects/vv300Flash.h:
 
-c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\3_libraries\tk0flash_base.h:
+../Src/tk/2_SubProjects/../3_Libraries/tk1flash2page.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/4_TK4DEBUG/tkMenu/u16set.h:
+../Src/tk/2_SubProjects/../3_Libraries/../3_Libraries/tk0flash_base.h:
+
+c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h:
 
 ../Src/tk/2_SubProjects/vv300set_user.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/time64/stm32_rtc.h:
+../Src/tk/2_SubProjects/../3_Libraries/time64/stm32_rtc.h:
 
 c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\3_libraries\time64\time64.h:
 
@@ -135,6 +138,6 @@ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\3_libraries\time64\time64_config.
 
 ../Src/tk/2_SubProjects/wk_distance_MBslave.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/vkDeclarations.h:
+../Src/tk/2_SubProjects/../3_Libraries/vkDeclarations.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/4_TK4DEBUG/d0_debug_main.h:
+../Src/tk/2_SubProjects/../4_tk4DEBUG/d0_debug_main.h:

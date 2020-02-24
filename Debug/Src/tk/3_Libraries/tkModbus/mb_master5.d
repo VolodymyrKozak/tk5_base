@@ -34,10 +34,9 @@ Src/tk/3_Libraries/tkModbus/mb_master5.o: \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/tkModbus/mb.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/tkModbus/mb_master.h \
- C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/tkModbus/mb.h
+ c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h \
+ ../Src/tk/3_Libraries/tkModbus/../../1_PROJECT/tkConfig.h \
+ ../Src/tk/3_Libraries/tkModbus/mb_master.h
 
 ../Src/tk/3_Libraries/tkModbus/mb_master5.h:
 
@@ -107,10 +106,8 @@ C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1
 
 C:/Users/KozakVF/workspase_TK5/tk5_base/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/1_PROJECT/tkConfig.h:
+c:\users\kozakvf\workspase_tk5\tk5_base\src\tk\1_project\tkconfig.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/tkModbus/mb.h:
+../Src/tk/3_Libraries/tkModbus/../../1_PROJECT/tkConfig.h:
 
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/tkModbus/mb_master.h:
-
-C:/Users/KozakVF/workspase_TK5/tk5_base/Src/tk/3_Libraries/tkModbus/mb.h:
+../Src/tk/3_Libraries/tkModbus/mb_master.h:

@@ -6,9 +6,9 @@
  */
 #include "tk0_grid_sv.h"
 #include "tk3_grid_declarations.h"
-#include <vv300set_factory.h>
+#include "vv300set_factory.h"
 #include "vv300set_user.h"
-#include <tk1_grid.h>
+#include "tk1_grid.h"
 static grid_t gd={0};
 
 static int16_t f_grid_to_modbus_regs(grid_t *g, uint16_t *m, uint16_t n);

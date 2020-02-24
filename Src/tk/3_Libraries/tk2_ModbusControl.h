@@ -7,7 +7,7 @@
 
 #ifndef TK2_MODBUSCONTROL_H_
 #define TK2_MODBUSCONTROL_H_
-#include <tkConfig.h>
+#include "../1_PROJECT/tkConfig.h"
 #ifdef DRIVES_REMOTE_CONTROL
 
 #include<stdint.h>

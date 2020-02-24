@@ -8,7 +8,7 @@
 
 #ifndef TKLIBRARIES_TKFURIE_H_
 #define TKLIBRARIES_TKFURIE_H_
-#include "tkConfig.h"
+#include "../../1_PROJECT/tkConfig.h"
 #ifdef FURIE_LIB
 
 

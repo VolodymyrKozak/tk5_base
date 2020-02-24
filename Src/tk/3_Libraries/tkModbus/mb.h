@@ -17,7 +17,7 @@
 #define MB_H_
 #include <stdint.h>
 #include "usart.h"
-#include "tkConfig.h"
+#include "../../1_PROJECT/tkConfig.h"
 
 
 #define RS485_UART4_SWITCH_PORT GPIOA

@@ -6,14 +6,14 @@
 // */
 #include "stdint.h"
 
-#include "mb.h"
-#include <vv300set_factory.h>
+#include "../3_Libraries/tkModbus/mb.h"
+#include "vv300set_factory.h"
 #include "vv300set_user.h"
 #include "wk_distance_MBslave.h"
-#include "vkDeclarations.h"
+#include "../3_Libraries/vkDeclarations.h"
 
 
-#include "d0_debug_main.h"
+#include "../4_tk4DEBUG/d0_debug_main.h"
 /**********************************************************************************************
  * ÃËÎÁÀËÜÍ² ÇÌ²ÍÍ². ÂÈÕ²ÄÍ² ÄËß ÌÎÄÓËß
  **********************************************************************************************/

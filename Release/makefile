@@ -9,14 +9,15 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include startup/subdir.mk
+-include Src/tk/4_TK4DEBUG/tkMenu/subdir.mk
+-include Src/tk/4_TK4DEBUG/subdir.mk
+-include Src/tk/3_Libraries/tkModbus/subdir.mk
+-include Src/tk/3_Libraries/tkGrid/subdir.mk
+-include Src/tk/3_Libraries/time64/subdir.mk
+-include Src/tk/3_Libraries/subdir.mk
+-include Src/tk/2_SubProjects/subdir.mk
+-include Src/tk/1_PROJECT/subdir.mk
 -include Src/subdir.mk
--include Drivers/tkSubProjects/subdir.mk
--include Drivers/tkPROJECT/subdir.mk
--include Drivers/tkLibraries/tkModbus/subdir.mk
--include Drivers/tkLibraries/tkMenu/subdir.mk
--include Drivers/tkLibraries/tkGrid/subdir.mk
--include Drivers/tkLibraries/time64/subdir.mk
--include Drivers/tkLibraries/subdir.mk
 -include Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk
 -include subdir.mk
 -include objects.mk
@@ -35,13 +36,13 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: 190315_TK300_Office3.elf
+all: tk5_base.elf
 
 # Tool invocations
-190315_TK300_Office3.elf: $(OBJS) $(USER_OBJS) ../STM32F105RBTx_FLASH.ld
+tk5_base.elf: $(OBJS) $(USER_OBJS) ../STM32F105RBTx_FLASH.ld
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU GCC Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft -specs=nosys.specs -specs=nano.specs -T"../STM32F105RBTx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "190315_TK300_Office3.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
+	arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft -specs=nosys.specs -specs=nano.specs -T"../STM32F105RBTx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "tk5_base.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
@@ -53,8 +54,8 @@ clean:
 
 post-build:
 	-@echo 'Generating hex and Printing size information:'
-	arm-none-eabi-objcopy -O ihex "190315_TK300_Office3.elf" "190315_TK300_Office3.hex"
-	arm-none-eabi-size "190315_TK300_Office3.elf"
+	arm-none-eabi-objcopy -O ihex "tk5_base.elf" "tk5_base.hex"
+	arm-none-eabi-size "tk5_base.elf"
 	-@echo ' '
 
 .PHONY: all clean dependents

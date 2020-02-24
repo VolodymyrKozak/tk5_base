@@ -7,15 +7,15 @@
 
 #include "mdGRD_test2.h"
 #ifdef GRID_DISTANCE_DEBUG
-#include "tkSGL.h"
+#include "../tkSGL.h"
 #include "stdint.h"
 #include "string.h"
 #include "math.h"
-#include "vkDeclarations.h"
+#include "../vkDeclarations.h"
 #include "../../3_Libraries/tkGrid/tkFurie.h"
-#include <tk1_grid.h>
-#include "vv300set_user.h"
-#include "zFF.h"
+#include "../../2_SubProjects/tk1_grid.h"
+#include "../../2_SubProjects/vv300set_user.h"
+#include "../../4_TK4DEBUG/zFF.h"
 /* Вхід симуляції від Модбас */
 uint16_t AmplMode   =0; /* 0- на вхід модуля GRID подаються реальні відліки АЦП струму -
 						   не нуль - симуляція, підміна відліків АЦП на змодельовані

@@ -6,7 +6,7 @@
  */
 #include "tk_oven_smi2.h"
 
-#include <tkConfig.h>
+#include "../1_PROJECT/tkConfig.h"
 
 #include <stdio.h>
 

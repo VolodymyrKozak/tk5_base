@@ -10,7 +10,7 @@
 #include <stdbool.h>
 //#include "tkConfig.h"
 #include "vv300Flash.h"
-#include "u16set.h"
+//#include "u16set.h"
 
 #define N_USET  2
 #define N_FCSET 4

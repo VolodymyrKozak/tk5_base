@@ -29,7 +29,7 @@
 
 
 
-#include "tkDebugThings.h"
+#include "../tkDebugThings.h"
 
 #include "tkCRC.h"
 

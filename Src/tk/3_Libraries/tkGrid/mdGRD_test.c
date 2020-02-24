@@ -4,10 +4,10 @@
  *  Created on: 17 ñ³÷. 2019 ð.
  *      Author: KozakVF
  */
-#include <tk1_grid.h>
+#include "../../2_SubProjects/tk1_grid.h"
 #include "../../3_Libraries/tkGrid/mdGRD_test.h"
 
-#include "tkConfig.h"
+#include "../../1_PROJECT/tkConfig.h"
 #include "stdint.h"
 #include "string.h"
 #include "math.h"

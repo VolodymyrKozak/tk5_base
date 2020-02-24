@@ -7,7 +7,7 @@
 
 #ifndef MB_SLAVE5_H_
 #define MB_SLAVE5_H_
-#include <tkConfig.h>
+#include "../../1_PROJECT/tkConfig.h"
 #ifndef IT_WAS_ATTEMPT_ONLY
 #if defined (SLAVERTU_HUART_4) || defined (SLAVERTU_HUART_5)
 //

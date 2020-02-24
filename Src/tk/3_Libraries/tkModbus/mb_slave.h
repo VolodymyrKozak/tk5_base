@@ -8,7 +8,7 @@
 #ifndef MB_SLAVE_H_
 #define MB_SLAVE_H_
 #include "mb.h"
-#include "tkConfig.h"
+#include "../../1_PROJECT/tkConfig.h"
 #if defined (SLAVERTU_HUART_4) || defined (SLAVERTU_HUART_5)
 
 #include <stdint.h>

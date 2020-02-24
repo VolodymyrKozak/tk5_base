@@ -6,8 +6,8 @@
  */
 
 #include "wk_motor_ctrl.h"
-#include "tkConfig.h"
-#include "vkDeclarations.h"
+#include "../1_PROJECT/tkConfig.h"
+#include "../3_Libraries/vkDeclarations.h"
 
 /* Остання команщда для мотора.
  * Якщо була натиснута кнопка START и РЕВЕРС
